@@ -12,7 +12,7 @@ i18n.use(initReactI18next).use(languageDetector).init({
         ar: {global: global_ar},
     },
     detection: {
-        order: ['htmlTag' , 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'path', 'subdomain'],
+        order: ['cookie' , 'htmlTag' , 'localStorage', 'sessionStorage', 'navigator', 'path', 'subdomain'],
         caches: ['cookie']
       },
       fallbackLng: 'en',

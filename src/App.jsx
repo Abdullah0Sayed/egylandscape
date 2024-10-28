@@ -2,26 +2,57 @@ import { useState , useEffect, Suspense } from 'react'
 import i18n from './i18n';
 
 
-import egyLand from '../public/Logo/EgyLandScapeLogoH.svg'
+
 import './App.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { setWebLanguage } from './rtk/slicers/languageSlicer';
 import { useTranslation } from 'react-i18next';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Cookies from 'js-cookie';
+// Componnets
+import RootLayout from './pages/RootLayout';
 
 
 // Create Router For Browser
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <Suspense>
+        <RootLayout/>
+      </Suspense>
+    ),
+    errorElement: `ERROR 404`,
+    children: [
+      {
+        index: true,
+        element: (
+          <Suspense>
+            {/* Home */}
+          </Suspense>
+        ),
+       
+      },
+      {
+        path: '/AboutUs',
+        element: (
+          <Suspense>
+            {/* About Page */}
+          </Suspense>
+        ),
+      }
+    ]
+  }
+])
+
 
 
 function App() {
-  const {t} = useTranslation('global');
+
   const language = useSelector(state=>state.webLanguage);
 
-  const dispatch = useDispatch();
 
-  const changeWebLanguage = (lang)=>{
-    dispatch(setWebLanguage(lang));
-  }
+
 
 
   useEffect(() => {
@@ -44,14 +75,18 @@ function App() {
     };
   }, []);
 
+useEffect(()=>{
+  const storedLang = Cookies.get("lang");
+    if (storedLang) {
+      i18n.changeLanguage(storedLang);
+    }
+} , [])
 
 
-  console.log(language)
   return (
-   <div className=''>
+   <div className={`${language} == 'en' ? 'font-dm' : 'font-cairo'`}>
       {/* <RouterProvider router={router}/> */}
-
-      <h1 className='font-dm'>{t('landing.welcome')}</h1>
+      <RouterProvider router={router}/>
    </div>
   )
 }

@@ -1,5 +1,12 @@
 {
     "landing": {
         "welcome": "مرحبا بكم في EGY LANDSCAPE"
+    },
+    "footer": {
+        "readyToGetStarted": "جاهز للبدء؟",
+        "getStartedBtn": "ابدا الان",
+        "locationHeading": "موقعنا",
+        "contactHeading": "تواصل معنا",
+        "socaialLinks": "وسائل التواصل"
     }
 }

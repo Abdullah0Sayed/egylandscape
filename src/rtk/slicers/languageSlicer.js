@@ -2,6 +2,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 // Import Needed Lib
 import i18n from "../../i18n";
+// Import Cookies
+import Cookies from "js-cookie";
+
 
 export const languageSlice = createSlice({
     name: 'langSlice',
@@ -11,6 +14,7 @@ export const languageSlice = createSlice({
             const webLang = action.payload;
             i18n.changeLanguage(webLang);
             console.log(webLang)
+            Cookies.set('lang' , webLang)
             return webLang;
         },
 
